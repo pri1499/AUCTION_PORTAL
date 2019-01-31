@@ -1,0 +1,35 @@
+1.USERS TABLE
+Create table persons(
+slno number(100) not null AUTO_INCREMENT,name varchar(30), 
+uname varchar(20),pwd varchar(20),address varchar(100),
+email varchar(50),phone number(10), ptype varchar(200) );
+
+
+2.ITEM TABLE
+Create table item(
+item_no number(20) not null primary key, item_desc varchar(100),
+tech_spec varchar(100), unit_code(40));
+
+
+3.ITA TABLE
+Create table ita( 
+ita_no number (20) not null primary key, 
+ita_date date, item_no number(30) ,  est_rate number(30), dely_date date, ra_start_date date, ra_stop_date date ,remarks varchar2(100));
+
+
+4.RA TABLE
+Create table ra(
+ra_sl_no number(30) not null AUTO_INCREMENT,  ita_no number(30) references ita(ita_no) , 
+item_no varchar(30) references item(item_no), username varchar(30) references persons(uname), qty_reqd number(30), 
+dely_date date, est_rate number(30), qty_quoted number(30), rate_quoted number(30), ra_start_date date, ra_stop_date date, applied date, 
+primary key(ra_sl_no)) ;
+
+5.PO TABLE
+Create table po(
+po_no number(20) not null AUTO_INCREMENT, po_date date 
+item_no varchar(30) references item(item_no), username varchar(30) references persons(uname), qty_ordered number(20), 
+dely_date date ,unit_rate number(20), 
+ra_sl_no number(20) references ra(ra_sl_no), ita_no number(30) references ita(ita_no)); 
+
+
+
